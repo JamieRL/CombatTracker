@@ -8,10 +8,13 @@ async function handleResponse(response: Response): Promise<unknown> {
 	if (!response.ok) {
 		throw new Error(`HTTP error! status: ${response.status}`);
 	}
+
 	const contentType = response.headers.get('content-type');
+
 	if (contentType && contentType.includes('application/json')) {
 		return response.json();
 	}
+
 	return response.text();
 }
 
@@ -19,15 +22,18 @@ export default {
 	async get<T>(endpoint: string, options: RequestOptions = {}): Promise<T> {
 		const { params, ...fetchOptions } = options;
 		const url = new URL(`${API_PREFIX}${endpoint}`, window.location.origin);
+
 		if (params) {
 			Object.entries(params).forEach(([key, value]) => {
 				url.searchParams.append(key, value);
 			});
 		}
+
 		const response = await fetch(url.toString(), {
 			method: 'GET',
 			...fetchOptions,
 		});
+
 		return handleResponse(response) as Promise<T>;
 	},
 
@@ -44,6 +50,7 @@ export default {
 			body: JSON.stringify(data),
 			...options,
 		});
+
 		return handleResponse(response) as Promise<T>;
 	},
 
@@ -60,6 +67,7 @@ export default {
 			body: JSON.stringify(data),
 			...options,
 		});
+
 		return handleResponse(response) as Promise<T>;
 	},
 
@@ -68,6 +76,7 @@ export default {
 			method: 'DELETE',
 			...options,
 		});
+
 		return handleResponse(response) as Promise<T>;
-	}
+	},
 };
