@@ -31,7 +31,7 @@ export default {
 
 		const response = await fetch(url.toString(), {
 			method: 'GET',
-			...fetchOptions,
+			...fetchOptions
 		});
 
 		return handleResponse(response) as Promise<T>;
@@ -45,10 +45,10 @@ export default {
 		const response = await fetch(`${API_PREFIX}${endpoint}`, {
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/json',
+				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify(data),
-			...options,
+			...options
 		});
 
 		return handleResponse(response) as Promise<T>;
@@ -62,10 +62,10 @@ export default {
 		const response = await fetch(`${API_PREFIX}${endpoint}`, {
 			method: 'PUT',
 			headers: {
-				'Content-Type': 'application/json',
+				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify(data),
-			...options,
+			...options
 		});
 
 		return handleResponse(response) as Promise<T>;
@@ -74,9 +74,9 @@ export default {
 	async delete<T>(endpoint: string, options: RequestOptions = {}): Promise<T> {
 		const response = await fetch(`${API_PREFIX}${endpoint}`, {
 			method: 'DELETE',
-			...options,
+			...options
 		});
 
 		return handleResponse(response) as Promise<T>;
-	},
+	}
 };
