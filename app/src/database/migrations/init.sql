@@ -1,0 +1,58 @@
+CREATE TABLE users (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	username TEXT NOT NULL,
+	email TEXT NOT NULL UNIQUE,
+	password TEXT NOT NULL
+);
+
+CREATE TABLE characters (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	user_id INTEGER NOT NULL,
+	name TEXT NOT NULL,
+	armor_class INTEGER DEFAULT 10,
+	health INTEGER DEFAULT 0,
+	health_max INTEGER DEFAULT 0,
+	temp_hitpoints INTEGER DEFAULT 0,
+	stamina INTEGER DEFAULT 0,
+	stamina_max INTEGER DEFAULT 0,
+	icon_path TEXT DEFAULT NULL,
+	created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+	updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+	FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE conditions (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	name TEXT NOT NULL,
+	description TEXT NOT NULL
+);
+
+CREATE TABLE character_conditions (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	character_id INTEGER NOT NULL,
+	condition_id INTEGER NOT NULL,
+	FOREIGN KEY (character_id) REFERENCES characters(id),
+	FOREIGN KEY (condition_id) REFERENCES conditions(id)
+);
+
+CREATE TABLE effects (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	name TEXT NOT NULL,
+);
+
+CREATE TABLE encounters (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+	updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE encounter_characters (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	encounter_id INTEGER NOT NULL,
+	character_id INTEGER NOT NULL,
+	FOREIGN KEY (encounter_id) REFERENCES encounters(id),
+	FOREIGN KEY (character_id) REFERENCES characters(id)
+);
+
+
+
