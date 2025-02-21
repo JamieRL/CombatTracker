@@ -1,6 +1,0 @@
-INSERT INTO encounter (id, name, user_id, created_at, updated_at) VALUES
-	(1, 1, 'Encounter 1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-	(2, 1, 'Encounter 2', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-	(3, 1, 'Encounter 3', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-	(4, 1, 'Encounter 4', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-	(5, 1, 'Encounter 5', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
