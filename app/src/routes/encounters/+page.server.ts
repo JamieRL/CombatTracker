@@ -1,5 +1,5 @@
 import db from '$database/db';
-import { encounters as encountersTable } from '$database/schema/encounters';
+import { encounter as encountersTable } from '$database/schema/encounters';
 import { eq } from 'drizzle-orm';
 import type { Encounter } from '$lib/types/encounter';
 
