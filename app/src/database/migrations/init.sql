@@ -1,11 +1,11 @@
-CREATE TABLE users (
+CREATE TABLE user (
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	username TEXT NOT NULL,
 	email TEXT NOT NULL UNIQUE,
 	password TEXT NOT NULL
 );
 
-CREATE TABLE characters (
+CREATE TABLE character (
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	user_id INTEGER NOT NULL,
 	name TEXT NOT NULL,
@@ -21,13 +21,13 @@ CREATE TABLE characters (
 	FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
-CREATE TABLE conditions (
+CREATE TABLE condition (
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	name TEXT NOT NULL,
 	description TEXT NOT NULL
 );
 
-CREATE TABLE character_conditions (
+CREATE TABLE character_condition (
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	character_id INTEGER NOT NULL,
 	condition_id INTEGER NOT NULL,
@@ -35,19 +35,21 @@ CREATE TABLE character_conditions (
 	FOREIGN KEY (condition_id) REFERENCES conditions(id)
 );
 
-CREATE TABLE effects (
+CREATE TABLE effect (
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
-	name TEXT NOT NULL,
+	name TEXT NOT NULL
 );
 
-CREATE TABLE encounters (
+CREATE TABLE encounter (
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	user_id INTEGER NOT NULL,
 	name TEXT NOT NULL,
 	created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-	updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+	updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+	FOREIGN KEY (user_id) references user(id)
 );
 
-CREATE TABLE encounter_characters (
+CREATE TABLE encounter_character (
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	encounter_id INTEGER NOT NULL,
 	character_id INTEGER NOT NULL,
